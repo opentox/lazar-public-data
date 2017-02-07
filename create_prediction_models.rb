@@ -1,21 +1,23 @@
-ENV["LAZAR_ENV"] = "development"
+ENV["LAZAR_ENV"] = "production"
 require_relative '../lazar/lib/lazar'
 #require 'lazar'
 include OpenTox
-#$mongo.database.drop
-#$gridfs = $mongo.database.fs # recreate GridFS indexes
+$mongo.database.drop
+$gridfs = $mongo.database.fs # recreate GridFS indexes
 
 =begin
 # classification models
 Dir["classification/*csv"].each do |file|
-  unless file.match(/hamster/)
-    Model::Prediction.from_csv_file file
+  if file.match(/hamster/)
+    Model::Validation.from_csv_file file
   end
 end
+#=end
 
+=begin
 # regression models
 Dir["regression/*log10.csv"].each do |file|
-  Model::Prediction.from_csv_file file
+  Model::Validation.from_csv_file file
 end
 =end
 
@@ -61,6 +63,10 @@ end
 =end
 
 # save
-
-#`mongodump -h 127.0.0.1 -d development`
+# local
+#`mongodump -h 127.0.0.1 -d production`
 #`mongorestore --host 127.0.0.1`
+
+# to/from docker volume /dump
+#`sudo mongodump -h 127.0.0.1 -o /dump -d production`
+#`sudo mongorestore -h 127.0.0.1 /dump`
