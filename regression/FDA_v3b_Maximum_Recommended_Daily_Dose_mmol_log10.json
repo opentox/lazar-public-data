@@ -1,0 +1,5 @@
+{ "species": "Human",
+  "endpoint": "Maximum Recommended Daily Dose",
+  "source": "http://www.epa.gov/comptox/dsstox/sdf_fdamdd.html",
+  "unit": "mmol/kg-bw/day"
+}

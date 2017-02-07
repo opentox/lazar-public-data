@@ -1,0 +1,5 @@
+{ "species": "Fathead minnow",
+  "endpoint": "Acute toxicity",
+  "source": "http://www.epa.gov/comptox/dsstox/sdf_epafhm.html",
+  "unit": "mmol"
+}
