@@ -8,7 +8,7 @@ $gridfs = $mongo.database.fs # recreate GridFS indexes
 =begin
 # classification models
 Dir["classification/*csv"].each do |file|
-  if file.match(/hamster/)
+  unless file.match(/hamster/)
     Model::Validation.from_csv_file file
   end
 end
