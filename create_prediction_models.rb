@@ -5,7 +5,7 @@ include OpenTox
 $mongo.database.drop
 $gridfs = $mongo.database.fs # recreate GridFS indexes
 
-=begin
+#=begin
 # classification models
 Dir["classification/*csv"].each do |file|
   unless file.match(/hamster/)
@@ -14,12 +14,12 @@ Dir["classification/*csv"].each do |file|
 end
 #=end
 
-=begin
+#=begin
 # regression models
 Dir["regression/*log10.csv"].each do |file|
   Model::Validation.from_csv_file file
 end
-=end
+#=end
 
 ## nano-lazar
 =begin
@@ -63,10 +63,5 @@ end
 =end
 
 # save
-# local
-#`mongodump -h 127.0.0.1 -d production`
+`mongodump -h 127.0.0.1 -d production`
 #`mongorestore --host 127.0.0.1`
-
-# to/from docker volume /dump
-#`sudo mongodump -h 127.0.0.1 -o /dump -d production`
-#`sudo mongorestore -h 127.0.0.1 /dump`
