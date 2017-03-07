@@ -2,5 +2,8 @@
 
 - Public lazar datasets
 - Scripts to generate prediction models and crossvalidations
-
-`mongorestore --host 127.0.0.1` imports the database dump
+- Scripts to generate and compare validation reports
+``` ruby
+  # comment or uncomment for your needs
+  ruby create_prediction_models.rb &
+```

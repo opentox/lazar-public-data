@@ -2,22 +2,24 @@ ENV["LAZAR_ENV"] = "production"
 require_relative '../lazar/lib/lazar'
 #require 'lazar'
 include OpenTox
-$mongo.database.drop
-$gridfs = $mongo.database.fs # recreate GridFS indexes
+#$mongo.database.drop
+#$gridfs = $mongo.database.fs # recreate GridFS indexes
 
-#=begin
+=begin
 # classification models
 Dir["classification/*csv"].each do |file|
   unless file.match(/hamster/)
     Model::Validation.from_csv_file file
   end
 end
-#=end
+=end
 
 #=begin
 # regression models
 Dir["regression/*log10.csv"].each do |file|
-  Model::Validation.from_csv_file file
+  unless file.match(/fathead/)#until dublicates not cleared
+    Model::Validation.from_csv_file file
+  end
 end
 #=end
 
@@ -62,6 +64,11 @@ feature_categories.each do |category|
 end
 =end
 
-# save
+# save local dump but git ignored
 `mongodump -h 127.0.0.1 -d production`
+
+# build reports and users dump
+eval File.read('./lazar_validation_reports.rb')
+
+# restore
 #`mongorestore --host 127.0.0.1`
