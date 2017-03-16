@@ -55,15 +55,15 @@ end
 if options[:dir]
   if options[:verbose]
     if !options[:classification] && !options[:regression]
-      json = Dir[options[:dir]+'*.json'].map { |f| JSON.parse File.read(f) }.flatten
+      json = Dir[options[:dir]+'*.json'].sort.map { |f| JSON.parse File.read(f) }.flatten
       puts JSON.pretty_generate json
     end
     if options[:classification]
-      json = Dir[options[:dir]+'*_classification_*.json'].map { |f| JSON.parse File.read(f) }.flatten
+      json = Dir[options[:dir]+'*_classification_*.json'].sort.map { |f| JSON.parse File.read(f) }.flatten
       puts JSON.pretty_generate json
     end
     if options[:regression]
-      json = Dir[options[:dir]+'*_regression_*.json'].map { |f| JSON.parse File.read(f) }.flatten
+      json = Dir[options[:dir]+'*_regression_*.json'].sort.map { |f| JSON.parse File.read(f) }.flatten
       puts JSON.pretty_generate json
     end
   else
@@ -71,11 +71,11 @@ if options[:dir]
     main = {}
 
     if !options[:classification] && !options[:regression] && !options[:verbose]
-      json = Dir[options[:dir]+'*.json'].map { |f| JSON.parse File.read(f) }.flatten
+      json = Dir[options[:dir]+'*.json'].sort.map { |f| JSON.parse File.read(f) }.flatten
       puts JSON.pretty_generate json
     end
     if options[:classification]
-      json = Dir[options[:dir]+'*_classification_*.json'].map { |f| JSON.parse File.read(f) }.flatten
+      json = Dir[options[:dir]+'*_classification_*.json'].sort.map { |f| JSON.parse File.read(f) }.flatten
       json.each do |report|
         main[report["endpoint"]] ||= []
         main[report["endpoint"]] << [report["species"], report["created_at"], report["crossvalidations"].map{|cv| {"accuracy": cv[1]["statistics"]["accuracy"], "weighted_accuracy": cv[1]["statistics"]["weighted_accuracy"], "true_rate": cv[1]["statistics"]["true_rate"], "predictivity": cv[1]["statistics"]["predictivity"]}}.flatten]
@@ -83,7 +83,7 @@ if options[:dir]
       puts JSON.pretty_generate main
     end
     if options[:regression]
-      json = Dir[options[:dir]+'*_regression_*.json'].map { |f| JSON.parse File.read(f) }.flatten
+      json = Dir[options[:dir]+'*_regression_*.json'].sort.map { |f| JSON.parse File.read(f) }.flatten
       json.each do |report|
         main[report["endpoint"]] ||= []
         main[report["endpoint"]] << [report["species"], report["created_at"], report["crossvalidations"].map{|cv| {"rmse": cv[1]["statistics"]["rmse"], "r_squared": cv[1]["statistics"]["r_squared"]}}.flatten]
