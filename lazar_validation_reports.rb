@@ -1,5 +1,5 @@
 ENV["LAZAR_ENV"] = "production"
-require_relative '../lazar/lib/lazar'
+require_relative "#{ENV["HOME"]}/lazar/lib/lazar" unless $LOADED_FEATURES.include?("#{ENV["HOME"]}/lazar/lib/lazar.rb")
 #require 'lazar'
 require 'json'
 include OpenTox
@@ -8,9 +8,9 @@ models = Model::Validation.all
 size = models.size
 puts "#{size} reports to store."
 
-# create dir if not exists
+# store in users home dir subfolder
 path = "#{ENV['HOME']}/lazar-validation-reports"
-dir = FileUtils.mkdir_p path
+FileUtils.mkdir_p path
 
 models.each_with_index do |model, idx|
 
@@ -50,6 +50,6 @@ models.each_with_index do |model, idx|
 
 end
 
-# store database dump
+# store database dump in users home dir subfolder
 puts "Storing database dump."
-`mongodump -h 127.0.0.1 -o #{path}/#{Time.now.to_s.split.first}-dump-#{ENV["LAZAR_ENV"]} -d #{ENV["LAZAR_ENV"]}`
+`mongodump -h #{ CENTRAL_MONGO_IP.blank? ? "127.0.0.1" : CENTRAL_MONGO_IP} -o #{path}/#{Time.now.to_s.split.first}-dump-#{ENV["LAZAR_ENV"]} -d #{ENV["LAZAR_ENV"]}`
