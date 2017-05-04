@@ -22,7 +22,7 @@ def delete_models type
     m.crossvalidations.each{|cv| cv.delete}
     m.model.delete
     m.delete
-  end
+  end unless models.empty?
 end
 
 puts CENTRAL_MONGO_IP.blank? ? "Use local mongodb on port: 127.0.0.1" : "Use central mongodb on port: #{CENTRAL_MONGO_IP}"
@@ -31,7 +31,7 @@ puts CENTRAL_MONGO_IP.blank? ? "Use local mongodb on port: 127.0.0.1" : "Use cen
 # classification models
 #delete_models "classification"
 Dir["classification/*csv"].each do |file|
-  unless file.match(/hamster/)
+  unless file.match(/hamster|mutagenicity/i)#until mutagenicity is refined
     puts "### #{file} ###\n"
     Model::Validation.from_csv_file file
   end
@@ -92,8 +92,10 @@ feature_categories.each do |category|
 end
 =end
 
+# remove existing local dump
+`rm -r dump/#{ENV["LAZAR_ENV"]}`
 # store local dump but git ignored
-`mongodump -h #{CENTRAL_MONGO_IP.blank? ? "127.0.0.1" : CENTRAL_MONGO_IP} -d production`
+`mongodump -h #{CENTRAL_MONGO_IP.blank? ? "127.0.0.1" : CENTRAL_MONGO_IP} -d #{ENV["LAZAR_ENV"]}`
 
 # build reports and users dump
 eval File.read('./lazar_validation_reports.rb')

@@ -5,4 +5,7 @@ include OpenTox
 $mongo.database.drop
 $gridfs = $mongo.database.fs # recreate GridFS indexes
 
-`mongorestore --host 127.0.0.1`
+# uncomment to load in particular to local mongodb
+#mongorestore --host 127.0.0.1
+
+`mongorestore --host #{ CENTRAL_MONGO_IP.blank? ? "127.0.0.1" : CENTRAL_MONGO_IP}`

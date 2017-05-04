@@ -20,7 +20,8 @@ models.each_with_index do |model, idx|
   type = model.regression? ? "regression" : "classification"
   #name = model.model.name.gsub!(/[^0-9A-Za-z.\-]/, '_')
   date = model.created_at.to_s.split.first
-  name = (model.endpoint + "_" + model.species).gsub!(/[^0-9A-Za-z.\-]/, '_')
+  dataset_name = model.training_dataset.source.split("/").last
+  name = (model.endpoint + "_" + model.species + "_" + dataset_name).gsub!(/[^0-9A-Za-z.\-]/, '_')
   branch = model.model.version["branch"]
   commit = model.model.version["commit"]
   filename = [date,type,branch,commit,name].join("_")
@@ -29,7 +30,7 @@ models.each_with_index do |model, idx|
   @json["endpoint"] = model.endpoint
   @json["species"] = model.species
   @json["source"] = model.source
-  @json["training_dataset"] = model.training_dataset.source
+  @json["training_dataset"] = dataset_name
   @json["training_compounds"] = model.training_dataset.data_entries.size
   @json["algorithms"] = model.algorithms
   @json["name"] = model.model.name
