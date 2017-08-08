@@ -1,5 +1,9 @@
 { "species": "Human",
   "endpoint": "Maximum Recommended Daily Dose",
   "source": "http://www.epa.gov/comptox/dsstox/sdf_fdamdd.html",
-  "unit": "mmol/kg-bw/day"
+  "unit": "mmol/kg-bw/day",
+  "qmrf": {
+    "group": "QMRF 4.14. Repeated dose toxicity",
+    "name": "OECD 452 Chronic Toxicity Studies"
+  }
 }

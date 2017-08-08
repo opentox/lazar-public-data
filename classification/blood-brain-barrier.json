@@ -1,5 +1,9 @@
 {
   "species": "Human",
   "endpoint": "Blood Brain Barrier Penetration",
-  "source": "http://cheminformatics.org/datasets/"
+  "source": "http://cheminformatics.org/datasets/",
+  "qmrf": {
+    "group": "QMRF 5. Toxicokinetics",
+    "name": "QMRF 5.4. Toxicokinetics.Blood-brain barrier penetration"
+  }
 }

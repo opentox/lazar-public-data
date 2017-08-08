@@ -1,5 +1,9 @@
 { "species": "Daphnia magna",
   "endpoint": "Acute toxicity",
   "source": "http://michem.disat.unimib.it/chm/download/toxicity.htm",
-  "unit": "mmol/L"
+  "unit": "mmol/L",
+  "qmrf": {
+    "group": "QMRF 3.1. Short-term toxicity to Daphnia (immobilisation)",
+    "name": "EC C. 2. Daphnia sp Acute Immobilisation Test"
+  }
 }

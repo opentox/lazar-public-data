@@ -1,5 +1,9 @@
 {
   "species": "Salmonella typhimurium",
   "endpoint": "Mutagenicity",
-  "source": "http://pubs.acs.org/doi/full/10.1021/ci900161g"
+  "source": "http://pubs.acs.org/doi/full/10.1021/ci900161g",
+  "qmrf": {
+    "group": "QMRF 4.10. Mutagenicity",
+    "name": "OECD 471 Bacterial Reverse Mutation Test"
+  }
 }

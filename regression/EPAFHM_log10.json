@@ -1,5 +1,9 @@
 { "species": "Fathead minnow",
   "endpoint": "Acute toxicity",
   "source": "http://www.epa.gov/comptox/dsstox/sdf_epafhm.html",
-  "unit": "mmol/L"
+  "unit": "mmol/L",
+  "qmrf": {
+    "group": "QMRF 3.3. Acute toxicity to fish (lethality)",
+    "name": "EC C. 1. Acute Toxicity for Fish"
+  }
 }

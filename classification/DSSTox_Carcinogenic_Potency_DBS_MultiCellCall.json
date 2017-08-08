@@ -1,4 +1,8 @@
 { "species": "Rodents (multiple species/sites)",
   "endpoint": "Carcinogenicity",
-  "source": "http://www.epa.gov/ncct/dsstox/sdf_cpdbas.html"
+  "source": "http://www.epa.gov/ncct/dsstox/sdf_cpdbas.html",
+  "qmrf": {
+    "group": "QMRF 4.12. Carcinogenicity",
+    "name": "OECD 451 Carcinogenicity Studies"
+  }
 }
