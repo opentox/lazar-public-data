@@ -1,0 +1,10 @@
+{
+  "species": "Rat (TD50)",
+  "endpoint": "Carcinogenicity",
+  "source": "http://www.epa.gov/ncct/dsstox/sdf_cpdbas.html",
+  "unit": "mmol/kg_bw/day",
+  "qmrf": {
+    "group": "QMRF 4.12. Carcinogenicity",
+    "name": "OECD 451 Carcinogenicity Studies"
+  }
+}
