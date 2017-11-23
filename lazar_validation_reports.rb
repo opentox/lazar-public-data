@@ -18,11 +18,10 @@ models.each_with_index do |model, idx|
   
   # define file name
   type = model.regression? ? "regression" : "classification"
-  #name = model.model.name.gsub!(/[^0-9A-Za-z.\-]/, '_')
   date = model.created_at.to_s.split.first
   dataset_name = model.training_dataset.source.split("/").last
-  name = (model.endpoint + "_" + model.species + "_" + dataset_name).gsub!(/[^0-9A-Za-z.\-]/, '_')
-  branch = model.model.version["branch"]
+  name = (model.endpoint + "_" + model.species + "_" + dataset_name).gsub!(/[^0-9A-Za-z.\-]/, '_').gsub!(/\.csv$/,"")
+  branch = model.model.version["branch"].gsub(/\//,"-")
   commit = model.model.version["commit"]
   filename = [date,type,branch,commit,name].join("_")
 
@@ -52,5 +51,10 @@ models.each_with_index do |model, idx|
 end
 
 # store database dump in users home dir subfolder
-puts "Storing database dump."
-`mongodump -h #{ CENTRAL_MONGO_IP.blank? ? "127.0.0.1" : CENTRAL_MONGO_IP} -o #{path}/#{Time.now.to_s.split.first}-dump-#{ENV["LAZAR_ENV"]} -d #{ENV["LAZAR_ENV"]}`
+if !CENTRAL_MONGO_IP.blank?
+	#TODO Can not dump because mongo commands missing in linked container !
+	#`mongodump -h #{CENTRAL_MONGO_IP} -o #{path}/#{Time.now.to_s.split.first}-dump-#{ENV["LAZAR_ENV"]} -d #{ENV["LAZAR_ENV"]}`
+else
+	puts "Storing database dump."
+	`mongodump -h 127.0.0.1 -o #{path}/#{Time.now.to_s.split.first}-dump-#{ENV["LAZAR_ENV"]} -d #{ENV["LAZAR_ENV"]}`
+end
