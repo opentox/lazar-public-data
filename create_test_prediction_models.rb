@@ -93,7 +93,7 @@ end
 =end
 
 # remove existing local dump
-`rm -r dump/#{ENV["LAZAR_ENV"]}`
+`if [ -d dump/#{ENV["LAZAR_ENV"]} ]; then rm -Rf dump/#{ENV["LAZAR_ENV"]}; fi`
 # store local dump but git ignored
 `mongodump -h #{CENTRAL_MONGO_IP.blank? ? "127.0.0.1" : CENTRAL_MONGO_IP} -d #{ENV["LAZAR_ENV"]}`
 
