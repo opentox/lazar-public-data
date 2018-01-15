@@ -4,8 +4,9 @@ require_relative '../lazar/lib/lazar'
 include OpenTox
 $mongo.database.drop
 $gridfs = $mongo.database.fs # recreate GridFS indexes
+PhysChem.descriptors # ensure descriptors are loaded
 
-@models = OpenTox::Model::Validation.all
+@models = Model::Validation.all
 
 def delete_models type
   case type
