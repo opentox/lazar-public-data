@@ -7,6 +7,7 @@ include OpenTox
 #=begin
 $mongo.database.drop
 $gridfs = $mongo.database.fs # recreate GridFS indexes
+PhysChem.descriptors # ensure descriptors are loaded
 `mongorestore --host #{ CENTRAL_MONGO_IP.blank? ? "127.0.0.1" : CENTRAL_MONGO_IP}`
 #=end
 
