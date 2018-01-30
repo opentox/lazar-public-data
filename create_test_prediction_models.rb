@@ -40,17 +40,17 @@ Dir["classification/*csv"].each do |file|
 end
 #=end
 
-=begin
+#=begin
 # regression models
 #delete_models "regression"
 Dir["regression/*log10.csv"].each do |file|
-  unless file.match(/fathead/)#until dublicates not cleared
+  if file.match(/EPAFHM_log10/)
     puts "### #{file} ###\n"
     Model::Validation.from_csv_file file
   end
   puts "### done: #{file} ###\n"
 end
-=end
+#=end
 
 ## nano-lazar
 =begin
