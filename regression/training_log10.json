@@ -1,5 +1,5 @@
 {
-  "species": "Rats",
+  "species": "Rat",
   "endpoint": "Lowest observed adverse effect level (LOAEL)",
   "source": "https://github.com/opentox/loael-paper/blob/revision/data/training_log10.csv",
   "unit": "mmol/kg_bw/day",
